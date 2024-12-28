@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { ModeToggler } from './Toggler';
+import { ModeToggler } from './toggler';
 import { useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
@@ -13,11 +13,13 @@ import * as actions from '@/actions';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const Header = () => {
-  const session = useSession(); // makes all routes dynamic as it checks the session in cookies
+  const session = useSession(); // Checks the server NOT cookies for session
   const { theme } = useTheme();
 
   let authContent: React.ReactNode;
-  if (session.data?.user) {
+  if (session.status === 'loading') {
+    authContent = null;
+  } else if (session.data?.user) {
     authContent = (
       <Popover>
         <PopoverTrigger>
