@@ -7,14 +7,18 @@ import { Textarea } from '../ui/textarea';
 import { Input } from '../ui/input';
 import * as actions from '@/actions';
 import { useActionState, startTransition } from 'react';
-import { CreateTopicFormState } from '@/actions/create-topic';
+import { CreatePostFormState } from '@/actions/create-post';
 import { FormEvent } from 'react';
 import FormButton from '../common/form-button';
 import { CirclePlus } from 'lucide-react';
 
-export default function TopicCreateForm() {
-  const [formState, action, isPending] = useActionState<CreateTopicFormState, FormData>(
-    actions.createTopic,
+interface Props {
+  slug: string;
+}
+
+export default function PostCreateForm({ slug }: Props) {
+  const [formState, action, isPending] = useActionState<CreatePostFormState, FormData>(
+    actions.createPost.bind(null, slug),
     {
       errors: {},
     }
@@ -33,27 +37,27 @@ export default function TopicCreateForm() {
       <PopoverTrigger asChild>
         <Button className="mx-auto" variant="default">
           <CirclePlus />
-          Create Topic
+          Create Post
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 p-4">
-            <h3 className="text-lg font-semibold">Create a new topic</h3>
-            <Label htmlFor="name" className="-mb-2">
-              Name
+            <h3 className="text-lg font-semibold">Create a new post</h3>
+            <Label htmlFor="title" className="-mb-2">
+              Title
             </Label>
-            <Input id="name" placeholder="Name" name="name" />
+            <Input id="title" placeholder="Title" name="title" />
             <span className="text-destructive text-xs -mt-2">
-              {!formState.errors._form && formState.errors.name?.join(', ')}
+              {!formState.errors._form && formState.errors.title?.join(', ')}
             </span>
 
-            <Label htmlFor="description" className="-mb-2">
-              Description
+            <Label htmlFor="content" className="-mb-2">
+              Content
             </Label>
-            <Textarea placeholder="Describe your topic" id="description" name="description" />
+            <Textarea placeholder="Content" id="content" name="content" />
             <span className="text-destructive text-xs -mt-2">
-              {!formState.errors._form && formState.errors.description?.join(', ')}
+              {!formState.errors._form && formState.errors.content?.join(', ')}
             </span>
 
             {formState.errors._form && (

@@ -47,6 +47,8 @@ export async function createTopic(
     };
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   let topic: Topic;
   try {
     topic = await db.topic.create({

@@ -59,7 +59,7 @@ const Header = () => {
   }
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between h-[6rem]">
       <div className="flex gap-4 items-center">
         {theme === 'dark' ? (
           <Image src="/dark-logo.png" alt="logo" width={100} height={100} />
