@@ -8,6 +8,7 @@ interface CommentShowProps {
 }
 
 export default async function CommentShow({ commentId, postId }: CommentShowProps) {
+  await new Promise((res) => setTimeout(res, 1000));
   const comments = await fetchCommentsByPostId(postId);
   const comment = comments.find((c) => c.id === commentId);
 

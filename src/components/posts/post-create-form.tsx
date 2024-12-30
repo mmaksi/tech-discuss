@@ -40,7 +40,7 @@ export default function PostCreateForm({ slug }: Props) {
           Create Post
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80">
+      <PopoverContent>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 p-4">
             <h3 className="text-lg font-semibold">Create a new post</h3>

@@ -36,8 +36,8 @@ export default function CommentCreateForm({ postId, parentId, startOpen }: Comme
 
   const form = (
     <form action={action} ref={ref}>
-      <div className="space-y-2 px-1">
-        <Textarea name="content" placeholder="Enter your comment" />
+      <div className="space-y-2 px-12 -mt-2">
+        <Textarea name="content" placeholder="Leave a comment" />
         <span className="text-destructive text-xs -mt-2">
           {!formState.errors._form && formState.errors.content?.join(', ')}
         </span>
@@ -54,7 +54,7 @@ export default function CommentCreateForm({ postId, parentId, startOpen }: Comme
               {formState.errors._form.join(', ')}
             </span>
           )}
-          <FormButton pending={isPending} cta="Reply" />
+          <FormButton pending={isPending} cta="Submit" />
         </div>
       </div>
     </form>
@@ -62,10 +62,10 @@ export default function CommentCreateForm({ postId, parentId, startOpen }: Comme
 
   return (
     <>
-      <div className="flex items-center gap-1">
-        <MessageCircle width={20} height={20} className="text-primary" />
+      <div className="flex items-center gap-1 mx-12">
+        <MessageCircle width={15} height={15} className="text-primary" />
         <Button size="sm" variant="link" className="p-0" onClick={() => setOpen(!open)}>
-          comment
+          reply
         </Button>
       </div>
       {open && form}

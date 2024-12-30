@@ -11,6 +11,7 @@ import { Button } from './ui/button';
 import { LogIn } from 'lucide-react';
 import * as actions from '@/actions';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import Link from 'next/link';
 
 const Header = () => {
   const session = useSession(); // Checks the server NOT cookies for session
@@ -61,11 +62,13 @@ const Header = () => {
   return (
     <div className="flex justify-between h-[6rem]">
       <div className="flex gap-4 items-center">
-        {theme === 'dark' ? (
-          <Image src="/dark-logo.png" alt="logo" width={100} height={100} />
-        ) : (
-          <Image src="/light-logo.png" alt="logo" width={100} height={100} />
-        )}
+        <Link href="/">
+          {theme === 'dark' ? (
+            <Image src="/dark-logo.png" alt="logo" width={150} height={150} />
+          ) : (
+            <Image src="/light-logo.png" alt="logo" width={150} height={150} />
+          )}
+        </Link>
         <Input type="text" placeholder="Search..." />
       </div>
       <div className="flex gap-4 items-center">
