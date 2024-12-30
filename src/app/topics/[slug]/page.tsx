@@ -18,7 +18,7 @@ export default async function TopicShowPage({ params }: TopicShowPageProps) {
         <PostList fetchData={() => fetchPostsByTopicSlug(slug)} />
       </div>
 
-      <div className="ms-auto w-[70%] border shadow py-3 px-2 max-h-[100%] overflow-y-auto flex flex-col">
+      <div className="ms-auto w-[70%] py-3 px-2 flex flex-col">
         <PostCreateForm slug={slug} />
       </div>
     </div>

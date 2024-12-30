@@ -19,3 +19,5 @@ export async function fetchPostsByTopicSlug(slug: string): Promise<PostWithData[
     },
   });
 }
+
+export async function fetchTopPosts() {}

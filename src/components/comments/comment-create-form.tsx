@@ -7,6 +7,7 @@ import { Textarea } from '../ui/textarea';
 import FormButton from '../common/form-button';
 import { CreateCommentFormState } from '@/actions/create-comment';
 import { Button } from '../ui/button';
+import { MessageCircle } from 'lucide-react';
 
 interface CommentCreateFormProps {
   postId: string;
@@ -47,22 +48,27 @@ export default function CommentCreateForm({ postId, parentId, startOpen }: Comme
           </div>
         ) : null}
 
-        {formState.errors._form && (
-          <span className="text-destructive text-xs text-center">
-            {formState.errors._form.join(', ')}
-          </span>
-        )}
-        <FormButton pending={isPending} loadingText="" cta="Reply" />
+        <div>
+          {formState.errors._form && (
+            <span className="text-destructive text-xs text-center">
+              {formState.errors._form.join(', ')}
+            </span>
+          )}
+          <FormButton pending={isPending} cta="Reply" />
+        </div>
       </div>
     </form>
   );
 
   return (
-    <div>
-      <Button size="sm" variant="secondary" onClick={() => setOpen(!open)}>
-        Create comment
-      </Button>
+    <>
+      <div className="flex items-center gap-1">
+        <MessageCircle width={20} height={20} className="text-primary" />
+        <Button size="sm" variant="link" className="p-0" onClick={() => setOpen(!open)}>
+          comment
+        </Button>
+      </div>
       {open && form}
-    </div>
+    </>
   );
 }

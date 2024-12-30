@@ -4,13 +4,13 @@ import { Loader2 } from 'lucide-react';
 
 type Props = {
   pending: boolean;
-  loadingText: string;
+  loadingText?: string;
   cta: string;
   className?: string;
 };
 
 const FormButton = (props: Props) => {
-  const { className, pending, cta, loadingText } = props;
+  const { className, pending, cta, loadingText = '' } = props;
   return (
     <Button className={className} disabled={pending}>
       <>
