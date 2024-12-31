@@ -20,4 +20,27 @@ export async function fetchPostsByTopicSlug(slug: string): Promise<PostWithData[
   });
 }
 
-export async function fetchTopPosts() {}
+export async function fetchTopPosts() {
+  return await db.post.findMany({
+    include: {
+      topic: { select: { slug: true } },
+      user: { select: { name: true, image: true } },
+      _count: { select: { comments: true } },
+    },
+    orderBy: [{ comments: { _count: 'desc' } }],
+    take: 10,
+  });
+}
+
+export async function fetchPostsBySearchTerm(term: string): Promise<PostWithData[]> {
+  return await db.post.findMany({
+    include: {
+      topic: { select: { slug: true } },
+      user: { select: { name: true, image: true } },
+      _count: { select: { comments: true } },
+    },
+    where: {
+      OR: [{ title: { contains: term } }, { content: { contains: term } }],
+    },
+  });
+}

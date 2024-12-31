@@ -1,17 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ModeToggler } from './toggler';
 import { useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
-import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { LogIn } from 'lucide-react';
 import * as actions from '@/actions';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Link from 'next/link';
+import { SearchInput } from './search-input';
 
 const Header = () => {
   const session = useSession(); // Checks the server NOT cookies for session
@@ -69,7 +69,9 @@ const Header = () => {
             <Image src="/light-logo.png" alt="logo" width={150} height={150} />
           )}
         </Link>
-        <Input type="text" placeholder="Search..." />
+        <Suspense>
+          <SearchInput type="text" placeholder="Search..." />
+        </Suspense>
       </div>
       <div className="flex gap-4 items-center">
         <span>{authContent}</span>
